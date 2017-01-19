@@ -1,0 +1,13 @@
+#!/bin/bash
+
+xfconf-query --channel=xfwm4 --property=/general/use_compositing --type=bool --toggle
+
+IS_COMPOSITE=$(xfconf-query --channel=xfwm4 --property=/general/use_compositing)
+
+export DISPLAY=":0"
+
+if "$IS_COMPOSITE" ; then
+    /usr/bin/notify-send "Using display composition" --icon=dialog-information
+else
+    /usr/bin/notify-send "Not using display composition" --icon=dialog-information
+fi
